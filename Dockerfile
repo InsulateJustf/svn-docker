@@ -1,5 +1,12 @@
-# Alpine Linux with s6 service management
-FROM smebberson/alpine-base:3.2.0
+# Alpine Linux with s6 service management.
+# Use linuxserver.io as base for their PUID/PGID support.
+# 3.15 is the most recent build that still has php7 support.
+FROM ghcr.io/linuxserver/baseimage-alpine:3.15
+
+# Add community/testing repositories for PHP7.
+RUN echo "# For PHP7" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.15/community" >> /etc/apk/repositories
+RUN apk update
 
 	# Install Apache2 and other stuff needed to access svn via WebDav
 	# Install svn
@@ -7,7 +14,7 @@ FROM smebberson/alpine-base:3.2.0
 	# Create required folders
 	# Create the authentication file for http access
 	# Getting SVNADMIN interface
-RUN apk add --no-cache apache2 apache2-utils apache2-webdav mod_dav_svn &&\
+RUN apk add --no-cache apache2 apache2-ctl apache2-utils apache2-webdav mod_dav_svn &&\
 	apk add --no-cache subversion &&\
 	apk add --no-cache wget unzip php7 php7-apache2 php7-session php7-json php7-ldap &&\
 	apk add --no-cache php7-xml &&\	
@@ -42,6 +49,9 @@ ADD dav_svn.conf /etc/apache2/conf.d/dav_svn.conf
 
 # Set HOME in non /root folder
 ENV HOME /home
+
+# Make Apache run as abc:abc for PUID/PGID support.
+RUN sed -i -e 's/^User apache/User abc/; s/^Group apache/Group abc/' /etc/apache2/httpd.conf
 
 # Expose ports for http and custom protocol access
 EXPOSE 80 443 3690
