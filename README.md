@@ -1,3 +1,5 @@
+[![Docker Image](https://img.shields.io/badge/docker%20image-available-green.svg)](https://hub.docker.com/r/chhamilton/svn-server/)
+
 # Description
 Lightweight container providing an SVN server, based on linuxserver.io **Alpine Linux** and S6 process management (see [here](https://github.com/linuxserver/docker-baseimage-alpine) for details).
 The access to the server is possible via **WebDav protocol** (http://), and via **custom protocol** (svn://).
