@@ -3,7 +3,7 @@ Lightweight container providing an SVN server, based on linuxserver.io **Alpine 
 The access to the server is possible via **WebDav protocol** (http://), and via **custom protocol** (svn://).
 
 This is based on Elle Florio's excellent svn-docker, but has been updated from Alpine Linux
-3.2 to 3.16 (the last build that supports PHP7, needed for SVNAdmin support). It has also been
+3.2 to 3.15 (the last build that supports PHP7, needed for SVNAdmin support). It has also been
 adapted to use the linuxserver.io Alpine Linux base image, which has `PUID`/`PGID` support for
 controlling what user Apache will run as, and use to access the repositories that are mounted
 in the container.
