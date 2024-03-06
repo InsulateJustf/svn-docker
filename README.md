@@ -2,7 +2,7 @@
 Lightweight container providing an SVN server, based on linuxserver.io **Alpine Linux** and S6 process management (see [here](https://github.com/linuxserver/docker-baseimage-alpine) for details).
 The access to the server is possible via **WebDav protocol** (http://), and via **custom protocol** (svn://).
 
-This is based on Elle Florio's excellent svn-docker, but has been updated to from Alpine Linux
+This is based on Elle Florio's excellent svn-docker, but has been updated from Alpine Linux
 3.2 to 3.16 (the last build that supports PHP7, needed for SVNAdmin support). It has also been
 adapted to use the linuxserver.io Alpine Linux base image, which has `PUID`/`PGID` support for
 controlling what user Apache will run as, and use to access the repositories that are mounted
@@ -23,7 +23,7 @@ Apache will run with the user and group ID provided via the `PUID` and `PGID` en
 
 Subversion repositories are expected to be mounted at `/home/svn`, and need to be read/write accessible to the Apache user.
 
-Access control is via the `passwd` (htpasswd format) and `subversion-access-control` file in
+Access control is via the `passwd` (htpasswd format) and `subversion-access-control` files in
 `/etc/subversion`. There are default empty version of these provided in the image but you
 should ideally replace this configuration directory. These are read from and written to as root
 so file permissions aren't overly important.
